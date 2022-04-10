@@ -1,0 +1,39 @@
+<p>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <button class="size-text" mat-button routerLink="/">Gym Starter</button>
+            <span class="example-spacer">
+        <div class="example-button-row">
+          <button mat-button [matMenuTriggerFor]="controle">Controle</button>
+          <mat-menu #controle="matMenu" yPosition="above">
+            <button mat-menu-item routerLink="/aluno" >Alunos</button>
+            <button mat-menu-item routerLink="." >Funcionários</button>
+            <button mat-menu-item routerLink="." >Matricula</button>
+          </mat-menu>
+
+          <button mat-button [matMenuTriggerFor]="financeiro">Financeiro</button>
+          <mat-menu #financeiro="matMenu" yPosition="above">
+            <button mat-menu-item routerLink="." >Caixa</button>
+            <button mat-menu-item routerLink="." >Contas a pagar</button>
+            <button mat-menu-item routerLink="." >Contas a receber</button>
+          </mat-menu>
+
+          <button mat-button [matMenuTriggerFor]="pesquisa">Pesquisa</button>
+          <mat-menu #pesquisa="matMenu" yPosition="above">
+            <button mat-menu-item routerLink="." >Alunos</button>
+            <button mat-menu-item routerLink="." >Matriculas</button>
+            <button mat-menu-item routerLink="." >Financeiro</button>
+          </mat-menu>
+
+          <button mat-button>Relatórios</button>
+
+
+
+        </div>
+      </span>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</p>

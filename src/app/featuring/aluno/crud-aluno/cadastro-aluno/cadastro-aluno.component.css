@@ -1,0 +1,5 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+.input-size {
+    padding: 2%;
+    width: 100%;
+}

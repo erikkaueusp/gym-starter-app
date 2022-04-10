@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { AlunoComponent } from './featuring/aluno/aluno.component';
+
+
+const routes: Routes = [
+  {path:'aluno', component:AlunoComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
