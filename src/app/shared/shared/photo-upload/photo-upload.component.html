@@ -1,0 +1,4 @@
+<div class="d-flex justify-content-center">
+    <img [src]="preview" immediateClick type="button" (click)="fileInput.click()" class="rounded-circle border border-3" style="margin:1%; width: 125px; height: 125px;">
+</div>
+<input id="file" hidden type="file" #fileInput hiddentype="file" accept="image/*" (change)="handleFile($event)" class="form-control">

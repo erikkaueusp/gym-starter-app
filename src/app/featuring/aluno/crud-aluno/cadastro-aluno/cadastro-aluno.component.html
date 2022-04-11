@@ -1,48 +1,47 @@
-<form class="example-form" style="background:#7b1fa2">
-    <div class="container">
-        <span class="h5" style="color:white; margin:1%">Cadastro</span>
-        <div></div>
-        <div class="row">
-            <!-- <div class="col-sm-1">
-                <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Company (disabled)</mat-label>
-                    <input matInput disabled value="Google">
-                </mat-form-field>
-            </div> -->
-            <div class="col">
-                <mat-form-field class="input-size" appearance="fill">
-                    <mat-label class="color-label">Nome</mat-label>
-                    <input matInput required>
-                </mat-form-field>
+<div style="background:#7b1fa2">
+    <div class="h5" style="color:white; padding: 2%;">Cadastro</div>
+    <form [formGroup]="form">
+        <div class="container">
+            <app-photo-upload></app-photo-upload>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-size" appearance="fill">
+                        <mat-label class="color-label">Nome</mat-label>
+                        <input type="text" formControlName="nome" matInput required>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="input-size" appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input type="email" formControlName="email" matInput placeholder="Ex. email@example.com" required>
+                        <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                        <mat-error *ngIf=false>
+                            Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf=false>
+                            Email is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
             </div>
-            <div class="col">
-                <mat-form-field class="input-size" appearance="fill">
-                    <mat-label>Email</mat-label>
-                    <input type="email" matInput placeholder="Ex. email@example.com" required>
-                    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
-                    <mat-error *ngIf=false>
-                        Please enter a valid email address
-                    </mat-error>
-                    <mat-error *ngIf=false>
-                        Email is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col">
-                <mat-form-field class="input-size" appearance="fill">
-                    <mat-label>Endereço</mat-label>
-                    <input matInput required>
-                </mat-form-field>
-            </div>
-            <div class="col">
-                <mat-form-field class="input-size" appearance="fill">
-                    <mat-label>Telefone</mat-label>
-                    <input type="tel" matInput placeholder="555-555-1234">
-                </mat-form-field>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-size" appearance="fill">
+                        <mat-label>Endereço</mat-label>
+                        <input type="text" formControlName="endereco" matInput required>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="input-size" appearance="fill">
+                        <mat-label>Telefone</mat-label>
+                        <input type="tel" formControlName="tel" matInput mask="(00) 00000-0000" placeholder="(11)9123-1234" required>
+                    </mat-form-field>
+                </div>
             </div>
         </div>
+    </form>
+    <div class="d-flex justify-content-end" style="padding: 2%;">
+        <button [disabled]="form.invalid" mat-flat-button color="accent">Salvar</button>
     </div>
-</form>
+</div>

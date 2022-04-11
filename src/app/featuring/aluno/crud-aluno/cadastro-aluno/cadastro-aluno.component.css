@@ -3,3 +3,24 @@
     padding: 2%;
     width: 100%;
 }
+
+
+/* input color class */
+
+::ng-deep input.mat-input-element {
+    color: #ffffff;
+}
+
+
+/* Change label color on focused */
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: #ffffff !important;
+}
+
+
+/* underline border color on focused */
+
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple {
+    background-color: #69f0ae !important;
+}

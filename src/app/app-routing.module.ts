@@ -5,7 +5,8 @@ import { AlunoComponent } from './featuring/aluno/aluno.component';
 
 
 const routes: Routes = [
-  {path:'aluno', component:AlunoComponent}
+  {path:'aluno', component:AlunoComponent},
+
 ];
 
 @NgModule({
