@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-photo-upload',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhotoUploadComponent implements OnInit {
 
+  @Output() alterarFoto = new EventEmitter()
 
   preview: string = '../../../../assets/img/nouser.jpg';
 
@@ -22,7 +23,12 @@ export class PhotoUploadComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = (event: any) => this.preview = event.target.result;
     reader.readAsDataURL(files[0]);
+    this.setFile(files[0]);
   }
+
+  setFile(file) {
+    this.alterarFoto.emit(file);
+}
 
 
 }

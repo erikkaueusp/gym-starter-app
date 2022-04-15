@@ -1,8 +1,8 @@
 <div style="background:#7b1fa2">
-    <div class="h5" style="color:white; padding: 2%;">Cadastro</div>
+    <div class="h5" style="color:#69f0ae; padding: 2%;">Cadastro</div>
     <form [formGroup]="form">
         <div class="container">
-            <app-photo-upload></app-photo-upload>
+            <app-photo-upload (alterarFoto)="getFrontPhoto($event)"></app-photo-upload>
             <div class="row">
                 <div class="col">
                     <mat-form-field class="input-size" appearance="fill">
@@ -42,6 +42,6 @@
         </div>
     </form>
     <div class="d-flex justify-content-end" style="padding: 2%;">
-        <button [disabled]="form.invalid" mat-flat-button color="accent">Salvar</button>
+        <button class="rounded-pill" (click)="save(this.form)" [disabled]="form.invalid" mat-flat-button color="accent">Salvar</button>
     </div>
 </div>

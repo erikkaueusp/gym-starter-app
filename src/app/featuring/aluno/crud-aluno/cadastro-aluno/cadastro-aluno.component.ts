@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AlunoService } from '../../service/aluno.service';
 
 @Component({
   selector: 'app-cadastro-aluno',
@@ -10,7 +11,9 @@ export class CadastroAlunoComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  formData = new FormData();
+
+  constructor(private formBuilder: FormBuilder, private alunoService: AlunoService) { }
 
   ngOnInit(): void {
 
@@ -26,6 +29,21 @@ export class CadastroAlunoComponent implements OnInit {
     endereco: [''],
     tel: ['']
     })
+  }
+
+  save(form) {
+    console.log("Salvo com sucesso!");
+    console.log(form.value);
+    console.log(this.formData.get);
+    // this.alunoService.save(form, this.formData);
+  }
+
+
+
+  getFrontPhoto(item:File) {
+    console.log("recebido huahuah")
+    this.formData.append('foto',item)
+    console.log(this.formData);
   }
 
 }

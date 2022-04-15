@@ -6,23 +6,23 @@
         <div class="example-button-row">
           <button mat-button [matMenuTriggerFor]="controle">Controle</button>
           <mat-menu #controle="matMenu" yPosition="above">
-            <button mat-menu-item routerLink="/aluno" >Alunos</button>
-            <button mat-menu-item routerLink="/foto" >Funcionários</button>
-            <button mat-menu-item routerLink="." >Matricula</button>
+            <a mat-menu-item routerLink="/aluno" >Alunos</a>
+            <a mat-menu-item routerLink="/foto" >Funcionários</a>
+            <a mat-menu-item routerLink="." >Matricula</a>
           </mat-menu>
 
           <button mat-button [matMenuTriggerFor]="financeiro">Financeiro</button>
           <mat-menu #financeiro="matMenu" yPosition="above">
-            <button mat-menu-item routerLink="." >Caixa</button>
-            <button mat-menu-item routerLink="." >Contas a pagar</button>
-            <button mat-menu-item routerLink="." >Contas a receber</button>
+            <a mat-menu-item routerLink="." >Caixa</a>
+            <a mat-menu-item routerLink="." >Contas a pagar</a>
+            <a mat-menu-item routerLink="." >Contas a receber</a>
           </mat-menu>
 
           <button mat-button [matMenuTriggerFor]="pesquisa">Pesquisa</button>
           <mat-menu #pesquisa="matMenu" yPosition="above">
-            <button mat-menu-item routerLink="." >Alunos</button>
-            <button mat-menu-item routerLink="." >Matriculas</button>
-            <button mat-menu-item routerLink="." >Financeiro</button>
+            <a mat-menu-item routerLink="." >Alunos</a>
+            <a mat-menu-item routerLink="." >Matriculas</a>
+            <a mat-menu-item routerLink="." >Financeiro</a>
           </mat-menu>
 
           <button mat-button>Relatórios</button>

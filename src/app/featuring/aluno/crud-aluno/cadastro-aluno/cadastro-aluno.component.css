@@ -8,14 +8,14 @@
 /* input color class */
 
 ::ng-deep input.mat-input-element {
-    color: #ffffff;
+    color: #69f0ae;
 }
 
 
 /* Change label color on focused */
 
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-    color: #ffffff !important;
+    color: #69f0ae !important;
 }
 
 
