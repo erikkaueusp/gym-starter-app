@@ -10,6 +10,7 @@ export class PhotoUploadComponent implements OnInit {
   @Output() alterarFoto = new EventEmitter()
 
   preview: string = '../../../../assets/img/nouser.jpg';
+  // base64String: string | ArrayBuffer;
 
 
   constructor() { }
@@ -21,7 +22,9 @@ export class PhotoUploadComponent implements OnInit {
     const target = event.target as HTMLInputElement;
     const files = target.files as FileList;
     const reader = new FileReader();
-    reader.onload = (event: any) => this.preview = event.target.result;
+    reader.onload = (event: any) => {
+      // this.base64String = reader.result
+      this.preview = event.target.result;}
     reader.readAsDataURL(files[0]);
     this.setFile(files[0]);
   }
