@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 
 
-const URL: string = 'http://localhost/local'
+const URL: string = 'http://localhost:8080/form'
 
 
 @Injectable({
@@ -16,19 +16,10 @@ export class AlunoService {
   constructor(private http: HttpClient) { }
 
 
-
-  save(formValue, photo): Observable<Response> {
-    return this.http.post<Response>(URL, this.buildJson(formValue, photo));
+  // {headers:{'Content-Type':'multipart/form-data'}}
+  save(formData): Observable<Response> {
+    return this.http.post<Response>(URL, formData);
   }
-
-
-  private buildJson(formValue, photo) {
-    const aluno = Object.assign({},formValue)
-    aluno.photo = photo;
-    return aluno;
-  }
-
-
 
 
 }

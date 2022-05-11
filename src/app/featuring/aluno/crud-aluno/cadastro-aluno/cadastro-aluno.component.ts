@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { AlunoService } from '../../service/aluno.service';
 
 @Component({
@@ -13,7 +15,9 @@ export class CadastroAlunoComponent implements OnInit {
 
   formData = new FormData();
 
-  constructor(private formBuilder: FormBuilder, private alunoService: AlunoService) { }
+  constructor(private formBuilder: FormBuilder,
+             private alunoService: AlunoService,
+             private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -32,10 +36,23 @@ export class CadastroAlunoComponent implements OnInit {
   }
 
   save(form) {
+
+    // let formModel = Object.assign({},form,FormAluno)
+
+    // console.log(formModel)
+
+    // this.formData.append('form',new Blob([JSON.stringify(form.value)],{type: "application/json"}));
+    this.formData.append('form',JSON.stringify(form.value))
     console.log("Salvo com sucesso!");
-    console.log(form.value);
-    console.log(this.formData.get);
-    // this.alunoService.save(form, this.formData);
+    this.alunoService.save(this.formData).subscribe({
+      next: () => {
+        this.openSnackBar("Salvo com sucesso!","OK");
+      },
+      error: err => console.log(err)
+    });
+
+    this.formData.delete('form');
+    this.formData.delete('foto');
   }
 
 
@@ -44,6 +61,13 @@ export class CadastroAlunoComponent implements OnInit {
     console.log("recebido huahuah")
     this.formData.append('foto',item)
     console.log(this.formData);
+  }
+
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['mat-toolbar', 'mat-accent']
+    });;
   }
 
 }
