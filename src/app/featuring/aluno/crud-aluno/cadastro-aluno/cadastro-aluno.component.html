@@ -2,7 +2,7 @@
     <div class="h5" style="color:#69f0ae; padding: 2%;">Cadastro</div>
     <form [formGroup]="form">
         <div class="container">
-            <app-photo-upload (alterarFoto)="getFrontPhoto($event)"></app-photo-upload>
+            <app-photo-upload [preview]="photoPath" (alterarFoto)="getFrontPhoto($event)" (nomeBehaviorSubject)="nomeBehaviorSubjectPai"></app-photo-upload>
             <div class="row">
                 <div class="col">
                     <mat-form-field class="input-size" appearance="fill">

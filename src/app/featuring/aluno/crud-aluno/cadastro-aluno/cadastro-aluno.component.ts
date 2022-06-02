@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject } from 'rxjs';
 
 import { AlunoService } from '../../service/aluno.service';
 
@@ -14,6 +15,10 @@ export class CadastroAlunoComponent implements OnInit {
   form: FormGroup;
 
   formData = new FormData();
+
+  photoPath = '../../../../../assets/img/nouser.jpg';
+
+  nomeBehaviorSubjectPai= new BehaviorSubject<boolean>(false);
 
   constructor(private formBuilder: FormBuilder,
              private alunoService: AlunoService,
@@ -47,18 +52,23 @@ export class CadastroAlunoComponent implements OnInit {
     this.alunoService.save(this.formData).subscribe({
       next: () => {
         this.openSnackBar("Salvo com sucesso!","OK");
+        this.cleanForm();
       },
-      error: err => console.log(err)
+      error: err => this.openSnackBar(`Deu ruim :( => ${err})`,"OK")
     });
 
+
+  }
+  cleanForm() {
     this.formData.delete('form');
     this.formData.delete('foto');
+    this.form.reset();
+    this.photoPath = '../../../../../assets/img/nouser-copy.jpg'; // gambiarra pra ajudar a restar a imagem.
   }
 
 
 
   getFrontPhoto(item:File) {
-    console.log("recebido huahuah")
     this.formData.append('foto',item)
     console.log(this.formData);
   }

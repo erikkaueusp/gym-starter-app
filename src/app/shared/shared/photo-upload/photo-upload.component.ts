@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-photo-upload',
@@ -9,7 +9,7 @@ export class PhotoUploadComponent implements OnInit {
 
   @Output() alterarFoto = new EventEmitter()
 
-  preview: string = '../../../../assets/img/nouser.jpg';
+  @Input() preview: string = '';
   // base64String: string | ArrayBuffer;
 
 
