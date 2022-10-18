@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs';
 
@@ -14,15 +14,15 @@ export class CadastroAlunoComponent implements OnInit {
 
   form: FormGroup;
 
+  file: File;
+
   formData = new FormData();
 
-  photoPath = '../../../../../assets/img/nouser.jpg';
-
-  nomeBehaviorSubjectPai= new BehaviorSubject<boolean>(false);
+  @Input() photoPath = '../../../../../assets/img/nouser.jpg';
 
   constructor(private formBuilder: FormBuilder,
-             private alunoService: AlunoService,
-             private snackBar: MatSnackBar) { }
+    private alunoService: AlunoService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -32,29 +32,25 @@ export class CadastroAlunoComponent implements OnInit {
   }
 
   private createForm() {
-  this.form = this.formBuilder.group({
-    nome: [''],
-    email: [''],
-    endereco: [''],
-    tel: ['']
+    this.form = this.formBuilder.group({
+      file: [''],
+      nome: ['', Validators.required],
+      email: ['', Validators.email],
+      endereco: [''],
+      tel: ['']
     })
   }
 
   save(form) {
-
-    // let formModel = Object.assign({},form,FormAluno)
-
-    // console.log(formModel)
-
-    // this.formData.append('form',new Blob([JSON.stringify(form.value)],{type: "application/json"}));
-    this.formData.append('form',JSON.stringify(form.value))
+    this.formData.append('foto', this.file)
+    this.formData.append('form', JSON.stringify(form.value))
     console.log("Salvo com sucesso!");
     this.alunoService.save(this.formData).subscribe({
       next: () => {
-        this.openSnackBar("Salvo com sucesso!","OK");
+        this.openSnackBar("Salvo com sucesso!", "OK");
         this.cleanForm();
       },
-      error: err => this.openSnackBar(`Deu ruim :( => ${err})`,"OK")
+      error: err => this.openSnackBar(`Deu ruim :( => ${err})`, "OK")
     });
 
 
@@ -67,11 +63,24 @@ export class CadastroAlunoComponent implements OnInit {
   }
 
 
-
-  getFrontPhoto(item:File) {
-    this.formData.append('foto',item)
-    console.log(this.formData);
+  onChange(target: any) {
+    if (target instanceof EventTarget) {
+      let element = target as HTMLInputElement;
+      let files = element.files
+      if (files) {
+        this.file = files[0]
+        const reader = new FileReader();
+        reader.onload = (event: any) => this.photoPath = event.target.result;
+        reader.readAsDataURL(files[0]);
+      }
+    }
   }
+
+
+
+  // getFrontPhoto(item: File) {
+  //   this.formData.append('foto', item)
+  // }
 
   openSnackBar(message, action) {
     this.snackBar.open(message, action, {

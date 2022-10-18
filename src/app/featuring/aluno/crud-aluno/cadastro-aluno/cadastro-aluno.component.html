@@ -1,47 +1,53 @@
 <div style="background:#7b1fa2">
-    <div class="h5" style="color:#69f0ae; padding: 2%;">Cadastro</div>
-    <form [formGroup]="form">
-        <div class="container">
-            <app-photo-upload [preview]="photoPath" (alterarFoto)="getFrontPhoto($event)" (nomeBehaviorSubject)="nomeBehaviorSubjectPai"></app-photo-upload>
-            <div class="row">
-                <div class="col">
-                    <mat-form-field class="input-size" appearance="fill">
-                        <mat-label class="color-label">Nome</mat-label>
-                        <input type="text" formControlName="nome" matInput>
-                    </mat-form-field>
-                </div>
-                <div class="col">
-                    <mat-form-field class="input-size" appearance="fill">
-                        <mat-label>Email</mat-label>
-                        <input type="email" formControlName="email" matInput placeholder="Ex. email@example.com">
-                        <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
-                        <mat-error *ngIf=false>
-                            Please enter a valid email address
-                        </mat-error>
-                        <mat-error *ngIf=false>
-                            Email is <strong> </strong>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <mat-form-field class="input-size" appearance="fill">
-                        <mat-label>Endereço</mat-label>
-                        <input type="text" formControlName="endereco" matInput>
-                    </mat-form-field>
-                </div>
-                <div class="col">
-                    <mat-form-field class="input-size" appearance="fill">
-                        <mat-label>Telefone</mat-label>
-                        <input type="tel" formControlName="tel" matInput mask="(00) 00000-0000" placeholder="(11)9123-1234">
-                    </mat-form-field>
-                </div>
-            </div>
+  <div class="h5" style="color:#69f0ae; padding: 2%;">Cadastro</div>
+  <form [formGroup]="form">
+    <div class="container">
+      <div class="text-center">
+        <input (change)="onChange($event.target)" #fileInput hidden formControlName=" file" type="file"
+          accept="image/*">
+        <img [src]="photoPath" alt="Imagem de perfil" (click)="fileInput.click()" class="img-thumbnail"
+          style="width: 120px; margin-bottom: 30px;">
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="input-size" appearance="fill">
+            <mat-label class="color-label">Nome</mat-label>
+            <input type="text" formControlName="nome" matInput required>
+          </mat-form-field>
         </div>
-    </form>
-    <div class="d-flex justify-content-end" style="padding: 2%;">
-        <button class="rounded-pill" (click)="save(this.form)" [disabled]="form.invalid" mat-flat-button color="accent">Salvar</button>
+        <div class="col">
+          <mat-form-field class="input-size" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" formControlName="email" matInput placeholder="Ex. email@example.com" required>
+            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+            <mat-error *ngIf=false>
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf=false>
+              Email is <strong> </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="input-size" appearance="fill">
+            <mat-label>Endereço</mat-label>
+            <input type="text" formControlName="endereco" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="input-size" appearance="fill">
+            <mat-label>Telefone</mat-label>
+            <input type="tel" formControlName="tel" matInput mask="(00) 00000-0000" placeholder="(11)9123-1234">
+          </mat-form-field>
+        </div>
+      </div>
     </div>
+  </form>
+  <div class="d-flex justify-content-end" style="padding: 2%;">
+    <button class="rounded-pill" (click)="save(this.form)" [disabled]="form.invalid" mat-flat-button
+      color="accent">Salvar</button>
+  </div>
 </div>

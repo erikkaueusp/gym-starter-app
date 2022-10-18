@@ -1,26 +1,17 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 .input-size {
-    padding: 2%;
-    width: 100%;
+  padding: 2%;
+  width: 100%;
 }
-
 
 /* input color class */
 
 ::ng-deep input.mat-input-element {
-    color: #69f0ae;
+  color: #69f0ae;
 }
-
 
 /* Change label color on focused */
 
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-    color: #69f0ae !important;
-}
-
-
-/* underline border color on focused */
-
-::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple {
-    background-color: #69f0ae !important;
+  color: #69f0ae !important;
 }

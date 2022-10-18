@@ -1,0 +1,15 @@
+.mat-expansion-panel {
+  background-color: #7b1fa2;
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input-size {
+  padding: 1%;
+  width: 20%;
+}

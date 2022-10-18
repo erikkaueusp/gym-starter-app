@@ -1,4 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple {
+  background-color: #69f0ae !important;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: #69f0ae !important;
+  -webkit-box-shadow: 0 0 0px 1000px #8836ab inset !important;
+  /* some com o fundo de autocomplete branco */
+}

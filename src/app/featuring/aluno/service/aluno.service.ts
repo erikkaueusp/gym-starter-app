@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 
 
-const URL: string = 'http://localhost:8080/form'
+const URL: string = 'http://localhost:8080/aluno'
 
 
 @Injectable({
