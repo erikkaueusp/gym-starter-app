@@ -103,6 +103,5 @@
                 }
             }
         }
-    },
-    "defaultProject": "gym-starter-app"
+    }
 }

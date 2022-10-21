@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AlunoService } from '../../service/aluno.service';
 import { Aluno } from '../aluno';
 
@@ -15,9 +15,9 @@ export class ConsultaAlunoComponent implements OnInit {
 
   @Input() photoPath = '../../../../../assets/img/nouser.jpg';
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private alunoService: AlunoService) { }
 
   ngOnInit(): void {

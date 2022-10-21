@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { AlunoService } from '../../service/aluno.service';
 })
 export class CadastroAlunoComponent implements OnInit {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   file: File;
 
@@ -20,7 +20,7 @@ export class CadastroAlunoComponent implements OnInit {
 
   @Input() photoPath = '../../../../../assets/img/nouser.jpg';
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private alunoService: AlunoService,
     private snackBar: MatSnackBar) { }
 
