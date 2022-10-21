@@ -12,4 +12,10 @@
 .input-size {
   padding: 1%;
   width: 20%;
+  margin-bottom: -2%;
 }
+
+/* div.row.justify-content-around {
+  margin-left: 0;
+  margin-right: 0;
+} */

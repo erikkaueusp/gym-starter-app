@@ -25,21 +25,27 @@ export class CadastroAlunoComponent implements OnInit {
     private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-
     this.createForm();
-
-
+    this.getDefaultImage();
   }
 
   private createForm() {
     this.form = this.formBuilder.group({
-      file: [''],
       nome: ['', Validators.required],
       email: ['', Validators.email],
       endereco: [''],
-      tel: ['']
+      tel: ['', Validators.required]
     })
   }
+
+  getDefaultImage() {
+    this.alunoService.getDefaultImage().subscribe({
+      next: (blob) => {
+        this.file = new File([blob], "foto");
+      }
+    });
+  }
+
 
   save(form) {
     this.formData.append('foto', this.file)
@@ -59,6 +65,7 @@ export class CadastroAlunoComponent implements OnInit {
     this.formData.delete('form');
     this.formData.delete('foto');
     this.form.reset();
+    this.getDefaultImage();
     this.photoPath = '../../../../../assets/img/nouser-copy.jpg'; // gambiarra pra ajudar a restar a imagem.
   }
 

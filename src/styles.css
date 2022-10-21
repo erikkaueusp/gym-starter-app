@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import "~bootstrap/dist/css/bootstrap.css";
 html,
 body {
   height: 100%;
@@ -17,4 +17,19 @@ input:-webkit-autofill {
   -webkit-text-fill-color: #69f0ae !important;
   -webkit-box-shadow: 0 0 0px 1000px #8836ab inset !important;
   /* some com o fundo de autocomplete branco */
+}
+
+.background {
+  background: #7b1fa2;
+}
+.tittle {
+  color: #69f0ae;
+  padding: 2%;
+}
+
+.img-profile {
+  max-width: 200px;
+  max-height: 150px;
+  width: auto;
+  height: auto;
 }

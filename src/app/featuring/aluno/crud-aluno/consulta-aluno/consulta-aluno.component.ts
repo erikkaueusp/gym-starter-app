@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlunoService } from '../../service/aluno.service';
+import { Aluno } from '../aluno';
 
 @Component({
   selector: 'app-consulta-aluno',
@@ -10,7 +11,7 @@ import { AlunoService } from '../../service/aluno.service';
 export class ConsultaAlunoComponent implements OnInit {
   panelOpenState = false;
 
-  list = [1, 1, 1, 1, 1, 1];
+  alunos: Aluno[] = [];
 
   @Input() photoPath = '../../../../../assets/img/nouser.jpg';
 
@@ -20,6 +21,19 @@ export class ConsultaAlunoComponent implements OnInit {
     private alunoService: AlunoService) { }
 
   ngOnInit(): void {
+    this.createForm()
+    this.consulta()
+  }
+
+  consulta() {
+    this.alunoService.find(this.form.value).subscribe({
+      next: (response) => {
+        this.alunos = response;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   private createForm() {
@@ -27,5 +41,6 @@ export class ConsultaAlunoComponent implements OnInit {
       nome: ['']
     })
   }
+
 
 }

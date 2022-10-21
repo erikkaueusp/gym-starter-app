@@ -1,29 +1,40 @@
 <form [formGroup]="form">
-  <div class="container" style="background:#7b1fa2">
-    <div class="row" style="text-align: center">
-      <mat-form-field class="input-size" appearance="fill">
-        <mat-label class="color-label">Nome</mat-label>
-        <input style="text-align:center;" type="text" formControlName="nome" matInput required>
-      </mat-form-field>
+  <div class="container background">
+    <div class="h5 tittle">Consulta</div>
+    <div class="row">
+      <div class="text-center mb-2">
+        <mat-form-field class="input-size" appearance="fill">
+          <mat-label class="color-label">Nome</mat-label>
+          <input class="text-center" type="text" formControlName="nome" matInput>
+        </mat-form-field>
+        <button class="rounded-pill" (click)="consulta()" mat-flat-button color="accent">Buscar</button>
+      </div>
     </div>
   </div>
 </form>
-<div style="margin: 2px 0;" *ngFor="let i of list">
-  <mat-accordion>
-    <mat-expansion-panel hideToggle>
-      <mat-expansion-panel-header collapsedHeight="190px" expandedHeight="190px">
-        <mat-panel-title>
-          <div class="row">
-            <div class="col">
-              <img [src]="photoPath" alt="Imagem de perfil" class="img-thumbnail" style="width: 120px;">
+<div class="row justify-content-start my-1 mx-0">
+  <div class="col-4 mb-1" *ngFor="let aluno of alunos">
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header collapsedHeight="190px" expandedHeight="190px">
+          <mat-panel-title>
+            <div class="row">
+              <div class="col">
+                <img [src]="'data:image/jpg;base64,'+aluno.base" alt="Imagem de perfil"
+                  class="img-thumbnail img-profile">
+              </div>
+              <div class="col">
+                <h2>{{ aluno.nome }}</h2>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <fa-icon [icon]="faCoffee"></fa-icon>
+              </div>
             </div>
-          </div>
-        </mat-panel-title>
-        <mat-panel-description>
-          This is a summary of the content
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p>This is the primary content of the panel.</p>
-    </mat-expansion-panel>
-  </mat-accordion>
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        {{aluno.email}}<br>{{aluno.endereco}}<br>{{aluno.telefone }}
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 </div>
