@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AlunoModule } from './featuring/aluno/aluno.module';
 import { MenuModule } from './menu/menu.module';
 import { SharedModule } from './shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -26,6 +27,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     AlunoModule,
     HttpClientModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

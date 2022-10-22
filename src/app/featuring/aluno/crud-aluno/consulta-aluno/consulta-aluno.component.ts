@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { DialogWarningComponent } from 'src/app/shared/shared/dialog/dialog-warning.component';
 import { AlunoService } from '../../service/aluno.service';
 import { Aluno } from '../aluno';
 
@@ -9,7 +12,8 @@ import { Aluno } from '../aluno';
   styleUrls: ['./consulta-aluno.component.css']
 })
 export class ConsultaAlunoComponent implements OnInit {
-  panelOpenState = false;
+  icon = faTrashCan;
+  isDisabled = false;
 
   alunos: Aluno[] = [];
 
@@ -18,7 +22,8 @@ export class ConsultaAlunoComponent implements OnInit {
   form: UntypedFormGroup;
 
   constructor(private formBuilder: UntypedFormBuilder,
-    private alunoService: AlunoService) { }
+    private alunoService: AlunoService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.createForm()
@@ -40,6 +45,22 @@ export class ConsultaAlunoComponent implements OnInit {
     this.form = this.formBuilder.group({
       nome: ['']
     })
+  }
+
+  openDialog(nome): void {
+    this.isDisabled = true;
+    const dialogRef = this.dialog.open(DialogWarningComponent, {
+      width: '20%',
+      data: { nome: nome },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isDisabled = false;
+      if (result) {
+        this.alunoService.excluir(nome).subscribe();
+        this.alunos = [];
+      }
+    });
   }
 
 

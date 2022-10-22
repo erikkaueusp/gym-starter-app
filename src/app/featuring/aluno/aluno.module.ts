@@ -24,7 +24,6 @@ import { ExcluiAlunoComponent } from './crud-aluno/exclui-aluno/exclui-aluno.com
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule
-
   ]
 })
 export class AlunoModule { }

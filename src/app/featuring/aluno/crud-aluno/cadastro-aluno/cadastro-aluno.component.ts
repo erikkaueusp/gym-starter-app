@@ -56,7 +56,10 @@ export class CadastroAlunoComponent implements OnInit {
         this.openSnackBar("Salvo com sucesso!", "OK");
         this.cleanForm();
       },
-      error: err => this.openSnackBar(`Deu ruim :( => ${err})`, "OK")
+      error: err => {
+        this.openSnackBar(`Deu ruim :( => ${err.error.message})`, "OK")
+        this.cleanForm();
+      }
     });
 
 

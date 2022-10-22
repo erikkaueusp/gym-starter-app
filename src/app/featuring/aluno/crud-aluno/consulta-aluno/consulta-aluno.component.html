@@ -15,22 +15,19 @@
 <div class="row justify-content-start my-1 mx-0">
   <div class="col-4 mb-1" *ngFor="let aluno of alunos">
     <mat-accordion>
-      <mat-expansion-panel hideToggle>
+      <mat-expansion-panel hideToggle [disabled]="isDisabled">
         <mat-expansion-panel-header collapsedHeight="190px" expandedHeight="190px">
+          <fa-icon (click)="openDialog(aluno.nome)" [icon]="icon"></fa-icon>
           <mat-panel-title>
             <div class="row">
               <div class="col">
                 <img [src]="'data:image/jpg;base64,'+aluno.base" alt="Imagem de perfil"
                   class="img-thumbnail img-profile">
               </div>
-              <div class="col">
-                <h2>{{ aluno.nome }}</h2>
-                <i class="fa fa-trash" aria-hidden="true"></i>
-                <fa-icon [icon]="faCoffee"></fa-icon>
-              </div>
             </div>
           </mat-panel-title>
           <mat-panel-description>
+            <h2>{{ aluno.nome }}</h2>
           </mat-panel-description>
         </mat-expansion-panel-header>
         {{aluno.email}}<br>{{aluno.endereco}}<br>{{aluno.telefone }}

@@ -33,3 +33,7 @@ input:-webkit-autofill {
   width: auto;
   height: auto;
 }
+
+.mat-dialog-container {
+  background-color: #7b1fa2 !important;
+}
