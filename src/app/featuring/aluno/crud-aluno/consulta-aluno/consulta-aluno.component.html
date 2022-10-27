@@ -13,11 +13,14 @@
   </div>
 </form>
 <div class="row justify-content-start my-1 mx-0">
-  <div class="col-4 mb-1" *ngFor="let aluno of alunos">
+  <div class="col-4 mb-1 adjust" *ngFor="let aluno of alunos">
     <mat-accordion>
       <mat-expansion-panel hideToggle [disabled]="isDisabled">
         <mat-expansion-panel-header collapsedHeight="190px" expandedHeight="190px">
-          <fa-icon (click)="openDialog(aluno.nome)" [icon]="icon"></fa-icon>
+          <div>
+            <fa-icon class="p-1" (click)="openDialoEdit(aluno.nome)" [icon]="faUserPen"></fa-icon>
+            <fa-icon class="p-1" (click)="openDialog(aluno.nome)" [icon]="icon"></fa-icon>
+          </div>
           <mat-panel-title>
             <div class="row">
               <div class="col">

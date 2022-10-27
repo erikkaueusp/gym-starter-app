@@ -15,7 +15,8 @@
   margin-bottom: -2%;
 }
 
-/* div.row.justify-content-around {
-  margin-left: 0;
-  margin-right: 0;
-} */
+@media (max-width: 768px) {
+  .adjust {
+    width: 100%;
+  }
+}
