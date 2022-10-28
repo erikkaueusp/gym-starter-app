@@ -1,20 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs';
 
 import { AlunoService } from '../../service/aluno.service';
+import { Aluno } from '../aluno';
 
 @Component({
   selector: 'app-cadastro-aluno',
   templateUrl: './cadastro-aluno.component.html',
   styleUrls: ['./cadastro-aluno.component.css']
 })
-export class CadastroAlunoComponent implements OnInit {
+export class CadastroAlunoComponent implements OnInit, OnChanges {
 
   form: UntypedFormGroup;
 
   file: File;
+
+  @Input() aluno: Aluno;
 
   formData = new FormData();
 
@@ -29,6 +32,12 @@ export class CadastroAlunoComponent implements OnInit {
     this.getDefaultImage();
   }
 
+  ngOnChanges() {
+    if (this.aluno) {
+      this.updateAluno(this.aluno);
+    }
+  }
+
   private createForm() {
     this.form = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -37,6 +46,16 @@ export class CadastroAlunoComponent implements OnInit {
       tel: ['', Validators.required]
     })
   }
+
+  private updateAluno(aluno: Aluno) {
+    const formValue = new Object();
+    formValue['nome'] = aluno.nome;
+    formValue['email'] = aluno.email;
+    formValue['endereco'] = aluno.endereco;
+    formValue['tel'] = aluno.telefone;
+    this.form.patchValue(formValue)
+  }
+
 
   getDefaultImage() {
     this.alunoService.getDefaultImage().subscribe({

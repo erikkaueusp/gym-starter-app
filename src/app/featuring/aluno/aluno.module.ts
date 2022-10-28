@@ -9,11 +9,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AlunoComponent } from './aluno.component';
 import { CadastroAlunoComponent } from './crud-aluno/cadastro-aluno/cadastro-aluno.component';
 import { ConsultaAlunoComponent } from './crud-aluno/consulta-aluno/consulta-aluno.component';
+import { EdicaoAlunoComponent } from './crud-aluno/edicao-aluno/edicao-aluno.component';
 
 
 
 @NgModule({
-  declarations: [AlunoComponent, CadastroAlunoComponent, ConsultaAlunoComponent],
+  declarations: [AlunoComponent, CadastroAlunoComponent, ConsultaAlunoComponent, EdicaoAlunoComponent],
   imports: [
     CommonModule,
     SharedModule,

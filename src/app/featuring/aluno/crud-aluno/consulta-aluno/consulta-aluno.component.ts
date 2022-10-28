@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { faTrashCan, faUserPen } from '@fortawesome/free-solid-svg-icons';
-import { DialogEditComponent } from 'src/app/shared/shared/dialog/dialog-edit.component';
 import { DialogWarningComponent } from 'src/app/shared/shared/dialog/dialog-warning.component';
 import { AlunoService } from '../../service/aluno.service';
 import { Aluno } from '../aluno';
+import { EdicaoAlunoComponent } from '../edicao-aluno/edicao-aluno.component';
 
 @Component({
   selector: 'app-consulta-aluno',
@@ -68,7 +68,7 @@ export class ConsultaAlunoComponent implements OnInit {
 
   openDialoEdit(nome): void {
     this.isDisabled = true;
-    const dialogRef = this.dialog.open(DialogEditComponent, {
+    const dialogRef = this.dialog.open(EdicaoAlunoComponent, {
       width: '20%',
       data: { nome: nome },
     });
