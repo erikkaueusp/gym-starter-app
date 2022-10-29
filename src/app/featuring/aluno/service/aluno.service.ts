@@ -22,6 +22,10 @@ export class AlunoService {
     return this.http.post<Response>(URL, formData);
   }
 
+  update(formData): Observable<Response> {
+    return this.http.put<Response>(URL, formData);
+  }
+
   find(formValue): Observable<Aluno[]> {
     let param = new URLSearchParams();
     if (formValue.nome) {

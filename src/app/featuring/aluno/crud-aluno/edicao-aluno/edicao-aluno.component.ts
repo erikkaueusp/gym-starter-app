@@ -11,6 +11,7 @@ export class EdicaoAlunoComponent implements OnInit {
 
 
   public aluno: Aluno;
+  isEdicao = true;
 
   constructor(
     public dialogRef: MatDialogRef<EdicaoAlunoComponent>,

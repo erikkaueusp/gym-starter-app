@@ -1,10 +1,9 @@
 <div class="background">
-  <div class="h5 tittle">Cadastro</div>
+  <div class="h5 tittle">{{ titulo }}</div>
   <form [formGroup]="form">
     <div class="container">
       <div class="text-center p-2">
-        <input (change)="onChange($event.target)" #fileInput hidden formControlName=" file" type="file" accept="image/*"
-          id="file">
+        <input (change)="onChange($event.target)" #fileInput hidden type="file" accept="image/*" id="file">
         <img [src]="photoPath" alt="Imagem de perfil" (click)="fileInput.click()" class="img-thumbnail img-profile">
       </div>
       <div class="row">
@@ -47,7 +46,8 @@
     </div>
   </form>
   <div class="d-flex justify-content-end p-2">
-    <button class="rounded-pill" (click)="save(this.form)" [disabled]="form.invalid" mat-flat-button
+    <button *ngIf="edicao" class="rounded-pill me-2" (click)="volta()" mat-flat-button color="accent">Voltar</button>
+    <button class="rounded-pill p-2" (click)="save(this.form)" [disabled]="form.invalid" mat-flat-button
       color="accent">Salvar</button>
   </div>
 </div>

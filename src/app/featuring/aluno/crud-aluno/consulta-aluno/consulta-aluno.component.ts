@@ -75,10 +75,7 @@ export class ConsultaAlunoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.isDisabled = false;
-      if (result) {
-        this.alunoService.excluir(nome).subscribe();
-        this.alunos = [];
-      }
+      this.consulta();
     });
   }
 
