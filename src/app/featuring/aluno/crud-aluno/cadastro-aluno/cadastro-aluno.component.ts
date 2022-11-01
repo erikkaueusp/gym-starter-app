@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs';
+import { dataToBase64 } from 'src/app/shared/shared/util-file';
 
 import { AlunoService } from '../../service/aluno.service';
 import { Aluno } from '../aluno';
@@ -26,10 +27,6 @@ export class CadastroAlunoComponent implements OnInit, OnChanges {
   editImage = false;
 
   @Output() cancelaEvent = new EventEmitter();
-
-  formData = new FormData();
-
-  @Input() photoPath = '../../../../../assets/img/nouser.jpg';
 
   constructor(private formBuilder: UntypedFormBuilder,
     private alunoService: AlunoService,
@@ -56,7 +53,7 @@ export class CadastroAlunoComponent implements OnInit, OnChanges {
       nome: ['', Validators.required],
       email: ['', Validators.email],
       endereco: [''],
-      tel: ['', Validators.required],
+      telefone: ['', Validators.required],
       base: ['']
     })
   }
@@ -67,65 +64,50 @@ export class CadastroAlunoComponent implements OnInit, OnChanges {
     formValue['nome'] = aluno.nome;
     formValue['email'] = aluno.email;
     formValue['endereco'] = aluno.endereco;
-    formValue['tel'] = aluno.telefone;
+    formValue['telefone'] = aluno.telefone;
     formValue['base'] = aluno.base;
     this.form.patchValue(formValue)
-    this.photoPath = `data:image/jpg;base64, ${aluno.base}`
-  }
-
-  private updatePhoto(form) {
-    if (!this.editImage) {
-      const blob = this.dataURItoBlob(form.value.base);
-      const imgFile = new File([blob], `${form.value.id}.png`, { type: 'image/jpeg' });
-      this.formData.append('foto', imgFile);
-    } else {
-      this.formData.append('foto', this.file);
-    }
   }
 
   getDefaultImage() {
     this.alunoService.getDefaultImage().subscribe({
       next: (blob) => {
         this.file = new File([blob], "foto");
+        dataToBase64(this.file).then((base64) => this.form.get('base').setValue(`${base64}`));
       }
     });
   }
 
 
-  save(form) {
-    this.formData.append('form', JSON.stringify(form.value))
+  save() {
     if (!this.edicao) {
-      this.formData.append('foto', this.file)
-      this.alunoService.save(this.formData).subscribe({
+      this.alunoService.save(this.form).subscribe({
         next: () => {
-          this.openSnackBar("Salvo com sucesso!", "OK");
+          this.feedbackSuccess();
           this.cleanForm();
         },
         error: err => {
-          this.openSnackBar(`Deu ruim :( => ${err.error.message})`, "OK")
+          this.feedbackFail(err.error.message);
+          console.log(err.error.message);
           this.cleanForm();
         }
       });
 
     } else {
-      this.updatePhoto(form);
-      this.alunoService.update(this.formData).subscribe({
+      this.alunoService.update(this.form).subscribe({
         next: () => {
-          this.openSnackBar("Atualizado com sucesso!", "OK");
+          this.feedbackUpdate();
           this.volta()
         }
       });
     }
 
   }
+
   cleanForm() {
-    this.formData.delete('form');
-    this.formData.delete('foto');
     this.form.reset();
     this.getDefaultImage();
-    this.photoPath = '../../../../../assets/img/nouser-copy.jpg'; // gambiarra pra ajudar a restar a imagem.
   }
-
 
   onChange(target: any) {
     this.editImage = this.edicao;
@@ -133,11 +115,8 @@ export class CadastroAlunoComponent implements OnInit, OnChanges {
       let element = target as HTMLInputElement;
       let files = element.files
       if (files) {
-        this.file = files[0]
-        const reader = new FileReader();
-        reader.onload = (event: any) => { this.photoPath = event.target.result; console.log(reader.result); }; // TODO é possivel enviar diretamente o base64 aqui, fazer um refactoring
-        reader.readAsDataURL(files[0]);
-
+        this.file = files[0];
+        dataToBase64(this.file).then((base64) => this.form.get('base').setValue(`${base64}`));
       }
     }
   }
@@ -146,28 +125,22 @@ export class CadastroAlunoComponent implements OnInit, OnChanges {
     this.cancelaEvent.emit();
   }
 
+  feedbackSuccess() {
+    this.openSnackBar("Salvo com sucesso!", "OK", 5000, 'mat-accent');
+  }
 
+  feedbackUpdate() {
+    this.openSnackBar("Atualizado com sucesso!", "OK", 5000, 'mat-primary');
+  }
 
-  // getFrontPhoto(item: File) {
-  //   this.formData.append('foto', item)
-  // }
+  feedbackFail(erro: string) {
+    this.openSnackBar(`Deu ruim! =>  ${erro}) `, "OK", 0, 'mat-warn')
+  }
 
-  openSnackBar(message, action) {
+  openSnackBar(message, action, time: number, color) {
     this.snackBar.open(message, action, {
-      duration: 2000,
-      panelClass: ['mat-toolbar', 'mat-accent']
-    });;
+      duration: time,
+      panelClass: ['mat-toolbar', color]
+    });
   }
-
-  dataURItoBlob(dataURI) {
-    const byteString = window.atob(dataURI);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([int8Array], { type: 'image/png' });
-    return blob;
-  }
-
 }

@@ -4,7 +4,8 @@
     <div class="container">
       <div class="text-center p-2">
         <input (change)="onChange($event.target)" #fileInput hidden type="file" accept="image/*" id="file">
-        <img [src]="photoPath" alt="Imagem de perfil" (click)="fileInput.click()" class="img-thumbnail img-profile">
+        <img [src]="this.form.get('base').value" alt="Imagem de perfil" (click)="fileInput.click()"
+          class="img-thumbnail img-profile">
       </div>
       <div class="row">
         <div class="col">
@@ -35,7 +36,7 @@
         <div class="col">
           <mat-form-field class="input-size" appearance="fill">
             <mat-label>Telefone</mat-label>
-            <input type="tel" formControlName="tel" matInput mask="(00) 00000-0000" placeholder="(11)99123-1234"
+            <input type="tel" formControlName="telefone" matInput mask="(00) 00000-0000" placeholder="(11)99123-1234"
               required>
             <mat-error *ngIf=false>
               Entre com um número de telefone.
@@ -47,7 +48,7 @@
   </form>
   <div class="d-flex justify-content-end p-2">
     <button *ngIf="edicao" class="rounded-pill me-2" (click)="volta()" mat-flat-button color="accent">Voltar</button>
-    <button class="rounded-pill p-2" (click)="save(this.form)" [disabled]="form.invalid" mat-flat-button
+    <button class="rounded-pill p-2" (click)="save()" [disabled]="form.invalid" mat-flat-button
       color="accent">Salvar</button>
   </div>
 </div>

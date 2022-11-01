@@ -1,3 +1,4 @@
+import { FormAluno } from './../crud-aluno/aluno';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -16,14 +17,12 @@ export class AlunoService {
 
   constructor(private http: HttpClient) { }
 
-
-  // {headers:{'Content-Type':'multipart/form-data'}}
-  save(formData): Observable<Response> {
-    return this.http.post<Response>(URL, formData);
+  save(form): Observable<Response> {
+    return this.http.post<Response>(URL, this.buildAluno(form));
   }
 
-  update(formData): Observable<Response> {
-    return this.http.put<Response>(URL, formData);
+  update(form): Observable<Response> {
+    return this.http.put<Response>(URL, this.buildAluno(form));
   }
 
   find(formValue): Observable<Aluno[]> {
@@ -44,6 +43,17 @@ export class AlunoService {
 
   getDefaultImage(): Observable<Blob> {
     return this.http.get('../../../assets/img/nouser.jpg', { responseType: 'blob' });
+  }
+
+  private buildAluno(form: any) {
+    const aluno = new FormAluno();
+    aluno.id = form.value.id;
+    aluno.nome = form.value.nome;
+    aluno.email = form.value.email;
+    aluno.telefone = form.value.telefone;
+    aluno.endereco = form.value.endereco;
+    aluno.base = form.value.base;
+    return aluno;
   }
 
 
